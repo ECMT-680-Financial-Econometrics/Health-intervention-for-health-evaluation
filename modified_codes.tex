@@ -61,13 +61,13 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={分析报告},
-  pdfauthor={作者名},
+  pdftitle={ECMT 680 ITS },
+  pdfauthor={Lingfeng Shi},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{分析报告}
-\author{作者名}
+\title{ITS Health Intervention}
+\author{Lingfeng Shi}
 \date{2024-02-26}
 
 \begin{document}
@@ -98,7 +98,8 @@ data \textless- read.csv(``sicily.csv'') head(data) data
 \section{compute the standardized
 rates}\label{compute-the-standardized-rates}}
 
-data\(rate <- with(data, aces/stdpop*10^5) # start the plot, excluding the points and the x-axis plot(data\)rate,type=``n'',ylim=c(00,300),xlab=``Year'',
+data\(rate <- with(data, aces/stdpop*10^5) \# start the plot, excluding the points and the x-axis 
+plot(data\)rate,type=``n'',ylim=c(00,300),xlab=``Year'',
 ylab=``Std rate x 10,000'', bty=``l'',xaxt=``n'') \# shade the post
 intervention period grey rect(36,0,60,300,col=grey(0.9),border=F) \#
 plot the observed rate for pre-intervention period
@@ -124,7 +125,7 @@ time, family=poisson, data) summary(model1)
 summary(model1)\(dispersion round(ci.lin(model1,Exp=T),3) datanew <- data.frame(stdpop=mean(data\)stdpop),smokban=rep(c(0,1),c(360,240)),
 time= 1:600/10,month=rep(1:120/10,5)) \# We generate predicted values
 based on the model in order to create a plot pred1 \textless-
-predict(model1,type=``response'',datanew)/mean(data\(stdpop)*10^5 #This can then be plotted along with a scatter graph (see above) plot(data\)rate,type=``n'',ylim=c(0,300),xlab=``Year'',ylab=``Std
+predict(model1,type=``response'',datanew)/mean(data\(stdpop)*10^5 \#This can then be plotted along with a scatter graph (see above) plot(data\)rate,type=``n'',ylim=c(0,300),xlab=``Year'',ylab=``Std
 rate x 10,000'', bty=``l'',xaxt=``n'')
 rect(36,0,60,300,col=grey(0.9),border=F)
 points(data\(rate,cex=0.7) axis(1,at=0:5*12,labels=F) axis(1,at=0:4*12+6,tick=F,labels=2002:2006) lines((1:600/10),pred1,col=2) title("Sicily, 2002-2006") datanew <- data.frame(stdpop=mean(data\)stdpop),smokban=0,time=1:600/10,
@@ -165,7 +166,16 @@ months)}\label{case-2-and-the-length-of-the-period-12-months}}
 model3 \textless- glm(aces \textasciitilde{} offset(log(stdpop)) +
 smokban + time + harmonic(month,2,12), family=quasipoisson, data)
 summary(model3)
-summary(model3)\(dispersion round(ci.lin(model3,Exp=T),3) # EFFECTS ci.lin(model3,Exp=T)["smokban",5:7] # TREND exp(coef(model3)["time"]*12) # We again check the model and autocorrelation functions res3 <- residuals(model3,type="deviance") plot(res3,ylim=c(-5,10),pch=19,cex=0.7,col=grey(0.6),main="Residuals over time",  ylab="Deviance residuals",xlab="Date") abline(h=0,lty=2,lwd=2) acf(res3) pacf(res3) # predict and plot of the seasonally adjusted model pred3 <- predict(model3,type="response",datanew)/mean(data\)stdpop)\emph{10\^{}5
+summary(model3)\(dispersion round(ci.lin(model3,Exp=T),3) 
+\# EFFECTS 
+ci.lin(model3,Exp=T)["smokban",5:7] 
+\# TREND 
+exp(coef(model3)["time"]*12) 
+\# We again check the model and autocorrelation functions 
+res3 <- residuals(model3,type="deviance") 
+plot(res3,ylim=c(-5,10),pch=19,cex=0.7,col=grey(0.6),main="Residuals over time",  ylab="Deviance residuals",xlab="Date") abline(h=0,lty=2,lwd=2) acf(res3) pacf(res3) 
+\# predict and plot of the seasonally adjusted model 
+pred3 <- predict(model3,type="response",datanew)/mean(data\)stdpop)\emph{10\^{}5
 plot(data\(rate,type="n",ylim=c(120,300),xlab="Year",ylab="Std rate x 10,000",  bty="l",xaxt="n") rect(36,120,60,300,col=grey(0.9),border=F) points(data\)rate,cex=0.7)
 axis(1,at=0:5}12,labels=F)
 axis(1,at=0:4\emph{12+6,tick=F,labels=2002:2006)
